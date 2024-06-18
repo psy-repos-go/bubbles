@@ -409,7 +409,7 @@ func (m *Model) FromValues(value, separator string) {
 type StyleFunc func(row, col int, value string) lipgloss.Style
 
 func (m Model) headersView() string {
-	var s = make([]string, 0, len(m.cols))
+	s := make([]string, 0, len(m.cols))
 	for _, col := range m.cols {
 		if col.Width <= 0 {
 			continue
@@ -422,7 +422,7 @@ func (m Model) headersView() string {
 }
 
 func (m *Model) renderRow(r int) string {
-	var s = make([]string, 0, len(m.cols))
+	s := make([]string, 0, len(m.cols))
 	for i, value := range m.rows[r] {
 		if m.cols[i].Width <= 0 {
 			continue
@@ -431,7 +431,7 @@ func (m *Model) renderRow(r int) string {
 		if m.styleFunc != nil {
 			cellStyle = m.styleFunc(r, i, value)
 			if r == m.cursor {
-				cellStyle.Inherit(m.styles.Selected)
+				cellStyle = cellStyle.Inherit(m.styles.Selected)
 			}
 		} else {
 			cellStyle = m.styles.Cell
